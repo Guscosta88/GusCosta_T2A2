@@ -24,7 +24,7 @@
 
 #### **R9 - Discuss the database relations to be implemented in your application.**
 
-- User = id primary_key, first_name, last_name, email, password, dob.
+- User = id primary_key, first_name, last_name, email NOT NULL UNIQUE, password NOT NULL, dob.
 - Wine = id primary_key, name, description, region, type, date, user_id foreign_key.
 - Food = id primary_key, name, description, type, date, wine_id foreign_key, user_id foreign_key.
 
