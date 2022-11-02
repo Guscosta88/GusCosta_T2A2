@@ -1,7 +1,7 @@
 from init import db, ma
 from marshmallow import fields
 
-class Wine(db.model):
+class Wine(db.Model):
     __tablename__ = 'wines'
 
     id = db.Column(db.Integer, primary_key=True)
