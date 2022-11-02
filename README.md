@@ -30,6 +30,13 @@
 
 #### **R10 - Describe the way tasks are allocated and tracked in your project**
 
+- The managing system tool I have decided to use is Trello board, I started my board with an Agile template and made some adjustments to suit my project which is divided into 5 tabs:
+* Completed - This is where I archive the tasks that are completed.
+* Design - on this session I alocated tasks that are related to Design such as, Code requirements, Conventions, etc.
+* Planning - This tab focuses on general management of the project and things that need to be planned.
+* In Progress - Tasks that are currently being worked on.
+* Next-up - Tasks comming next.
+
 #### **Day one:**
 
 - Following the same Idea from my Terminal App I have decided to now build an API for foods and wines.
@@ -44,6 +51,21 @@
 4. Don't think to much, just start.
 
 ![Day One](./images/001.jpg)
+
+
+#### **Day two:**
+
+- Focus on Setting up Schemas, Controllers, app structure and environment configuration in general.
+
+
+#### **Stand-up Day two:**
+
+1. R1, R2, R6 ERD, R9, server and environment setup, Models.
+2. Not blockers just getting everything sorted slowly.
+3. Setup Schemas and controllers.
+4. If you make a bit the next step opens up and gets clearer.
+
+![Day Two](./images/002.jpg)
 
 
     References

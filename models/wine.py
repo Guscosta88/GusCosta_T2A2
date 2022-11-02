@@ -1,4 +1,5 @@
-from init import db
+from init import db, ma
+from marshmallow import fields
 
 class Wine(db.model):
     __tablename__ = 'wines'
@@ -10,3 +11,7 @@ class Wine(db.model):
     type = db.Column(db.String)
     date = db.Column(db.Date)
     # user_id
+
+class WineSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'name', 'description', 'region', 'type', 'date')
