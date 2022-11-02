@@ -1,5 +1,7 @@
 from init import db
+# This is one of the places where the init items are imported
 
+# the class Food uses Sqlalchemy to create a table structure with column names and data types.
 class Food(db.model):
     __tablename__ = 'foods'
 

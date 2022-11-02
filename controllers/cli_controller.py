@@ -1,5 +1,6 @@
 from flask import Blueprint
 from init import db, bcrypt
+# This is one of the places where the init items are imported
 from datetime import date
 from models.wine import Wine
 
