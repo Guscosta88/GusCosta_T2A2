@@ -5,6 +5,8 @@ from init import db, ma, bcrypt, jwt
 # This is one of the places where the init items are imported
 
 from controllers.wines_controller import wines_db
+from controllers.foods_controller import foods_db
+from controllers.auth_controller import auth_db
 from controllers.cli_controller import db_commands
 # the main controller commands are imported
 
@@ -30,6 +32,8 @@ def create_app():
     # This is where the imports from init are used to initialize the main application.
 
     app.register_blueprint(wines_db)
+    app.register_blueprint(foods_db)
+    app.register_blueprint(auth_db)
     app.register_blueprint(db_commands)
     # this is where the controllers are resgistered to be able to run when the flask run command is called.
 
