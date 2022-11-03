@@ -4,7 +4,7 @@ from init import db, ma
 from marshmallow import fields
 
 # the class User uses Sqlalchemy to create a table structure with column names and data types.
-class User(db.model):
+class User(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True, nullable=False)
@@ -12,7 +12,7 @@ class User(db.model):
     last_name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
-    dob =db.Column(db.Date, nullable=False)
+    dob =db.Column(db.String, nullable=False)
     # if user is younger than 18 he is not allowed to use the app
 
     # Marshmallow ma converts these data types into db readable format via the Schema and with the use of marshmallow fields each column item can be retrieved by the controller on a Model View Control (MVC) structure.

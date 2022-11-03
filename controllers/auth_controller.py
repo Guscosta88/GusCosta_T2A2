@@ -29,11 +29,11 @@ def auth_register():
     try:
         user = User(
             # Create a new User model instance from the user_info
-            first_name=data['first_name'],
-            last_name=data['last_name'],
-            email=data['email'],
-            password=data['password'],
-            dob = data['dob']
+            first_name=request.json.get('first_name'),
+            last_name=request.json.get('last_name'),
+            email=request.json['email'],
+            password=bcrypt.generate_password_hash(request.json['password']).decode('utf-8'),
+            dob = request.json.get('dob')
         )
         # the session add, adds all of the above changes to the commit
         db.session.add(user)

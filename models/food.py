@@ -1,10 +1,10 @@
-from init import db
+from init import db, ma
 # This is one of the places where the init items are imported
 
 from marshmallow import fields
 
 # the class Food uses Sqlalchemy to create a table structure with column names and data types.
-class Food(db.model):
+class Food(db.Model):
     __tablename__ = 'foods'
 
     id = db.Column(db.Integer, primary_key=True)

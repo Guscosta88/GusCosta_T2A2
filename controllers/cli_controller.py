@@ -4,6 +4,7 @@ from init import db, bcrypt
 from datetime import date
 from models.wine import Wine
 from models.food import Food
+from models.user import User
 # The classes and Schemas are imported here from models
 
 # This is where the commands route url is defined in the blueprint to be registered in the main.
@@ -24,6 +25,23 @@ def drop_db():
 # the function seed_db Adds data to the table columns using the add_all function that uses a CLI command to send json to the database and prints a message to the terminal that the tables were seeded.
 @db_commands.cli.command('seed')
 def seed_db():
+    users = [
+        # Using the User class to add each row as a column to the table
+        # the bcrypt module adds a layer of encryption enforced with the hash function and the decoder function
+        User(
+            first_name='Eddie',
+            last_name='Osterland',
+            email='eddieosterland@email.com',
+            password=bcrypt.generate_password_hash('merlot').decode('utf-8'),
+            dob = '25/06/1954'
+        )
+    ]
+
+    # the session add_all, adds all of the above changes to the commit
+    db.session.add_all(users)
+    # the session commit pushes all of the above changes to the database
+    db.session.commit()
+
     wines = [
         # Using the Wine class to add each row as a column to the table
         Wine(
