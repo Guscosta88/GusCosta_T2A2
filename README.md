@@ -33,9 +33,32 @@
 - The managing system tool I have decided to use is Trello board, I started my board with an Agile template and made some adjustments to suit my project which is divided into 5 tabs:
 * Completed - This is where I archive the tasks that are completed.
 * Design - on this session I alocated tasks that are related to Design such as, Code requirements, Conventions, etc.
-* Planning - This tab focuses on general management of the project and things that need to be planned.
+* Planning - This tab focuses on general management of the project and things that need to be planned and that can guide the direction of the project such as User Stories.
 * In Progress - Tasks that are currently being worked on.
 * Next-up - Tasks comming next.
+
+#### **User Stories:**
+
+- Taking into consideration the main three types of target audience the API is created for, I have decided to create three user stories to understand what would be the way these three distinct users would approach its usability and with what end, to also understand the priority of each and what features should be available.
+    Any user can Register and login, access and alter foods and wines, unless he or her is underage, the app won't let anyone underage register. 
+
+![User Story One](./images/user_story_one.svg)
+
+#### **User Story One:**
+
+- Analysing the first user story which is from a Professional Sommelier, I was able to identify Three features that the app needs to support to attend his needs. He needs to be able to acess a list or one specific wine, he needs to be able to add a wine if not in the list and he needs to be able to delete any wine he thinks is not in accordance with his standards.
+
+![User Story Two](./images/user_story_two.svg)
+
+#### **User Story Two:**
+
+- Analysing the second user story which is from a Chef, I was able to identify Three features that the app needs to support to attend his needs. He needs to be able to acess a list or one specific food, he needs to be able to add foods if not in the list and he needs to be able to delete any foods he thinks are not in accordance with his standards.
+
+![User Story Three](./images/user_story_three.svg)
+
+#### **User Story Three:**
+
+- Analysing the third user story which is from an Wine Enthusiast, I was able to identify Two features that the app needs to support to attend his needs. He needs to be able to acess a list or one specific food, He needs to be able to acess a list or one specific wine.
 
 #### **Day one:**
 
@@ -66,6 +89,18 @@
 4. If you make a bit the next step opens up and gets clearer.
 
 ![Day Two](./images/002.jpg)
+
+
+#### **Day three:**
+
+#### **Stand-up Day three:**
+
+1. Set-up wine Schemas, wine Controllers defined app structure.
+2. translate my ERD to the actual application.
+3. Go back to my Trello board and refine it adding User stories, work on the other schemas and controllers.
+4. When everything is strategically structured and organized from the beggining it makes the process easier down the road.
+
+![Day Three](./images/003.jpg)
 
 
     References

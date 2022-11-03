@@ -9,7 +9,7 @@ wines_db = Blueprint('wines',__name__,url_prefix='/wines')
 
 @wines_db.route('/')
 def all_wines():
-    # the function all_wines retrieves all wines using the select function to select the class Wine.
+    # the function all_wines retrieves all existing wines using the select function to select the class Wine.
     stmt = db.select(Wine)
     # the session object handles the database and scalars (plural) filters the result into a rows.
     wines = db.session.scalars(stmt)
@@ -21,7 +21,7 @@ def all_wines():
 @wines_db.route('/<int:id>/')
 # The <int:id> specifies two things, a path converter (int) and a variable name to be captured (id).
 def one_wine(id):
-    # the function one_wine retrieve only one wine using the select function to select the class Wine and the filter_by to filter_by id.
+    # the function one_wine retrieve only one existing wine using the select function to select the class Wine and the filter_by to filter_by id.
     stmt = db.select(Wine).filter_by(id=id)
     # the session object handles the database and scalar (Singular) returns the matching result.
     wine = db.session.scalar(stmt)
