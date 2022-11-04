@@ -14,8 +14,13 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
     dob =db.Column(db.String, nullable=False)
     # if user is younger than 18 he is not allowed to use the app
+    wines = db.relationship('Wine', back_populates='user', cascade='all, delete')
+    foods = db.relationship('Food', back_populates='user', cascade='all, delete')
 
     # Marshmallow ma converts these data types into db readable format via the Schema and with the use of marshmallow fields each column item can be retrieved by the controller on a Model View Control (MVC) structure.
 class UserSchema(ma.Schema):
+    wines = fields.List(fields.Nested('WineSchema', exclude=['user']))
+    foods = fields.List(fields.Nested('FoodSchema', exclude=['user']))
     class Meta:
-        fields = ('id', 'first_name', 'last_name', 'email', 'password', 'dob')
+        fields = ('id', 'first_name', 'last_name', 'email', 'password', 'dob', 'wines', 'foods')
+        ordered=True

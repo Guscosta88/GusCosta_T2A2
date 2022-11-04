@@ -49,7 +49,8 @@ def seed_db():
             description='Full-bodied wines with high tannins and noticeable acidity.',
             region='France, Bordeaux',
             type='Red Wine',
-            date = date.today()
+            date = date.today(),
+            user = users[0]
         )
     ]
 
@@ -64,7 +65,8 @@ def seed_db():
             name='Steak',
             description='T-Bone Steak with mash potatoes and mushroom sauce',
             type='Main',
-            date = date.today()
+            date = date.today(),
+            user = users[0]
         )
     ]
     # the session add_all, adds all of the above changes to the commit
