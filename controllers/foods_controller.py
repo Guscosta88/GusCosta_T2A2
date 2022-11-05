@@ -3,7 +3,9 @@ from init import db
 from datetime import date
 # This is one of the places where the init items are imported
 from models.food import Food, FoodSchema
+from models.wine import Wine
 # The Food class and FoodSchema are imported here from models
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 # This is where the foods route url is defined in the blueprint to be registered in the main.
 foods_db = Blueprint('foods',__name__,url_prefix='/foods')
@@ -33,6 +35,7 @@ def one_food(id):
 
 # The Route bellow allows the user to access Delete one food from the database.
 @foods_db.route('/<int:id>/', methods=['DELETE'])
+@jwt_required()
 # The <int:id> specifies two things, a path converter (int) and a variable name to be captured (id) and the http request method DELETE.
 def delete_one_food(id):
     # the function delete one_food retrieve only one food using the select function to select the class Food and the filter_by to filter_by id.
@@ -51,6 +54,7 @@ def delete_one_food(id):
 
 # The Route bellow allows the user to Update one food from the database.
 @foods_db.route('/<int:id>/', methods=['PUT', 'PATCH'])
+@jwt_required()
 # The <int:id> specifies two things, a path converter (int) and a variable name to be captured (id).
 # The method PUT replaces the entire resource with given data, the PATCH only replaces specified fields.
 def update_one_food(id):
@@ -75,6 +79,7 @@ def update_one_food(id):
 
 # The Route bellow allows the user to Create a new food to the database.
 @foods_db.route('/', methods=['POST'])
+@jwt_required()
 # The method POST Creates new items to be added to the database.
 def create_food():
     # the function create_food creates one food using the load function to load a POST method request json to the database.
@@ -85,7 +90,9 @@ def create_food():
             name=data['name'],
             description=data['description'],
             type=data['type'],
-            date = date.today()
+            date = date.today(),
+            user_id = get_jwt_identity(),
+            wine_id = 25
         )
         # the session add, adds all of the above changes to the commit
         db.session.add(food)

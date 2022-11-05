@@ -12,15 +12,16 @@ class Wine(db.Model):
     description = db.Column(db.Text, nullable=False)
     region = db.Column(db.String, nullable=False)
     type = db.Column(db.String, nullable=False)
-    date = db.Column(db.Date, nullable=False)
+    date = db.Column(db.Date)
     
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-    user = db.relationship("User")
+    user = db.relationship("User", back_populates='wines')
+    foods = db.relationship('Food')
 
 # Marshmallow ma converts these data types into db readable format via the Schema and with the use of marshmallow fields each column item can be retrieved by the controller on a Model View Control (MVC) structure.
 class WineSchema(ma.Schema):
-    user = fields.Nested('UserSchema', only=['name', 'email'])
+    user = fields.Nested('UserSchema', only=['first_name', 'last_name', 'email'])
 
     class Meta:
         fields = ('id', 'name', 'description', 'region', 'type', 'date', 'user')

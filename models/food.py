@@ -11,21 +11,21 @@ class Food(db.Model):
     name = db.Column(db.String, nullable=False)
     description = db.Column(db.Text, nullable=False)
     type = db.Column(db.String, nullable=False)
-    date = db.Column(db.Date, nullable=False)
+    date = db.Column(db.Date)
     
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    # wine_id = db.Column(db.Integer, db.ForeignKey('wines.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    wine_id = db.Column(db.Integer, db.ForeignKey('wines.id'))
 
-    user = db.relationship("User")
-    # wine = db.relationship("Wine")
+    user = db.relationship("User", back_populates='foods')
+    wine = db.relationship("Wine", back_populates='foods', cascade='all, delete')
 
 
 
 # Marshmallow ma converts these data types into db readable format via the Schema and with the use of marshmallow fields each column item can be retrieved by the controller on a Model View Control (MVC) structure.
 class FoodSchema(ma.Schema):
-    user = fields.Nested('UserSchema', only=['name', 'email'])
-    # wine = fields.Nested('WineSchema')
+    user = fields.Nested('UserSchema', only=['first_name', 'last_name', 'email'])
+    wine = fields.Nested('WineSchema', exclude=['user'])
     
     class Meta:
-        fields = ('id', 'name', 'description', 'type', 'date', 'user')
+        fields = ('id', 'name', 'description', 'type', 'date', 'user', 'wine')
         ordered=True

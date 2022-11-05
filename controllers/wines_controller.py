@@ -4,6 +4,7 @@ from datetime import date
 # This is one of the places where the init items are imported
 from models.wine import Wine, WineSchema
 # The Wine class and WineSchema are imported here from models
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 # This is where the wines route url is defined in the blueprint to be registered in the main.
 wines_db = Blueprint('wines',__name__,url_prefix='/wines')
@@ -33,6 +34,7 @@ def one_wine(id):
 
 # The Route bellow allows the user to access Delete one wine from the database.
 @wines_db.route('/<int:id>/', methods=['DELETE'])
+@jwt_required()
 # The <int:id> specifies two things, a path converter (int) and a variable name to be captured (id) and the http request method DELETE.
 def delete_one_wine(id):
     # the function delete_one_wine retrieve only one wine using the select function to select the class Wine and the filter_by to filter_by id.
@@ -51,6 +53,7 @@ def delete_one_wine(id):
 
 # The Route bellow allows the user to Update one wine from the database.
 @wines_db.route('/<int:id>/', methods=['PUT', 'PATCH'])
+@jwt_required()
 # The <int:id> specifies two things, a path converter (int) and a variable name to be captured (id).
 # The method PUT replaces the entire resource with given data, the PATCH only replaces specified fields.
 def update_one_wine(id):
@@ -76,6 +79,7 @@ def update_one_wine(id):
 
 # The Route bellow allows the user to Create a new wine to the database.
 @wines_db.route('/', methods=['POST'])
+@jwt_required()
 # The method POST Creates new items to be added to the database.
 def create_wine():
     # the function create_wine creates one wine using the load function to load a POST method request json to the database.
@@ -87,7 +91,8 @@ def create_wine():
             description=data['description'],
             region=data['region'],
             type=data['type'],
-            date = date.today()
+            date = date.today(),
+            user_id = get_jwt_identity()
         )
         # the session add, adds all of the above changes to the commit
         db.session.add(wine)
