@@ -102,6 +102,17 @@
 
 ![Day Three](./images/003.jpg)
 
+#### **Day Four:**
+
+#### **Stand-up Day Four:**
+
+1. Set-up Table relations.
+2. Thinking of best way to Retrieve Wine ID to use it on foods controller.
+3. Add tasks to Trello Board that will help refine the code.
+4. To have a better idea on how to approach table relations.
+
+![Day Four](./images/004.jpg)
+
 [T2A2 - Trello Board Link](https://trello.com/invite/b/PFdD3j01/ATTI3c1f6177a4fcfb1c8ad7cb418e806189CE4181F9/t2a2-agile-board)
 
 
