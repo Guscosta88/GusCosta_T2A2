@@ -13,6 +13,7 @@ class Food(db.Model):
     type = db.Column(db.String, nullable=False)
     date = db.Column(db.Date)
     
+    
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     wine_id = db.Column(db.Integer, db.ForeignKey('wines.id'))
 
@@ -27,5 +28,5 @@ class FoodSchema(ma.Schema):
     wine = fields.Nested('WineSchema', exclude=['user'])
     
     class Meta:
-        fields = ('id', 'name', 'description', 'type', 'date', 'user', 'wine')
+        fields = ('id', 'name', 'description', 'type', 'date', 'user', 'wine_id', 'wine')
         ordered=True

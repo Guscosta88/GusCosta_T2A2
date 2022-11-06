@@ -3,7 +3,6 @@ from init import db
 from datetime import date
 # This is one of the places where the init items are imported
 from models.food import Food, FoodSchema
-from models.wine import Wine
 # The Food class and FoodSchema are imported here from models
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
@@ -92,7 +91,7 @@ def create_food():
             type=data['type'],
             date = date.today(),
             user_id = get_jwt_identity(),
-            wine_id = 25
+            wine_id = data['wine_id']
         )
         # the session add, adds all of the above changes to the commit
         db.session.add(food)

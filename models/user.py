@@ -19,7 +19,7 @@ class User(db.Model):
 
     # Marshmallow ma converts these data types into db readable format via the Schema and with the use of marshmallow fields each column item can be retrieved by the controller on a Model View Control (MVC) structure.
 class UserSchema(ma.Schema):
-    wines = fields.List(fields.Nested('WineSchema', exclude=['user']))
+    wines = fields.List(fields.Nested('WineSchema', only=['name']))
     foods = fields.List(fields.Nested('FoodSchema', exclude=['user']))
     class Meta:
         fields = ('id', 'first_name', 'last_name', 'email', 'password', 'dob', 'wines', 'foods')
