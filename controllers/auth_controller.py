@@ -14,6 +14,7 @@ from sqlalchemy.exc import IntegrityError
 # This is where the auth route url is defined in the blueprint to be registered in the main.
 auth_db = Blueprint('auth',__name__,url_prefix='/auth')
 
+
 # The Route bellow allows the user to access all users from the database.
 @auth_db.route('/users/')
 def get_users():
@@ -23,6 +24,17 @@ def get_users():
     users = db.session.scalars(stmt)
     # the User schema and the dump converts the results into JSON that is displayed, excluding the password.
     return UserSchema(many=True, exclude=['password']).dump(users)
+
+# The Route bellow allows the user to access one User from the database.
+@auth_db.route('/users/<int:id>/')
+# The <int:id> specifies two things, a path converter (int) and a variable name to be captured (id).
+def get_one_user(id):
+    # the function get_one_user retrieves only one existing user using the select function to select the class User and the filter_by to filter_by id.
+    stmt = db.select(User).filter_by(id=id)
+    # the session object handles the database and scalar (Singular) returns the matching result.
+    user = db.session.scalar(stmt)
+    # the User schema and the dump converts the results into JSON that is displayed.
+    return UserSchema().dump(user)
 
 
 # The Route bellow allows the user to Register to the database.

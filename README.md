@@ -18,6 +18,286 @@
 
     [Why Postgresql](https://fulcrum.rocks/blog/why-use-postgresql-database#:~:text=Postgres%20allows%20you%20to%20store,lot%20of%20supporters%20and%20critics.)
 
+#### **R5 - Document all endpoints for your API.**
+
+----------------------------------------------------------------
+
+#### **1. auth/register/**
+
+- Method: Post
+- Identifier: None
+- Authentication: Password Hashed with the use of Bcrypt
+- Token: None
+- Description: Adds new user information to the Database.
+
+![Post auth/register/](./images/endpoints/001.jpg)
+
+----------------------------------------------------------------
+
+#### **2. auth/login/**
+
+- Method: Post
+- Identifier: Email
+- Authentication: email and Password
+- Token: Generated with JWT
+- Description: Allows the registered user to Login and it generates a JWT Token required to access the other routes.
+
+![Post auth/login/](./images/endpoints/002-A.jpg)
+
+----------------------------------------------------------------
+
+#### **3. auth/users/**
+
+- Method: Get
+- Identifier: None
+- Authentication: None
+- Token: None
+- Description: It displays a list with all users, including which wine and which food the user entered.
+
+![Get auth/users/](./images/endpoints/002-B.jpg)
+
+----------------------------------------------------------------
+
+#### **4. auth/users/id**
+
+- Method: Get
+- Identifier: user_id
+- Authentication: None
+- Token: None
+- Description: It displays information of the user with the selected id, including which wine and which food the user entered.
+
+![Get auth/users/id](./images/endpoints/002-C.jpg)
+
+----------------------------------------------------------------
+
+#### **5. wines/**
+
+- Method: Post
+- Identifier: user_id
+- Authentication: @jwt_required()
+- Token: JWT Access bearer Token Generated when login is successful.
+- Description: It allows the user to add a new wine to the database and it returns the new entered wine and user information. It also adds the date created with the use of datetime Python Module.
+
+![Post wines/](./images/endpoints/003.jpg)
+
+----------------------------------------------------------------
+
+#### **6. wines/**
+
+- Method: Get
+- Identifier: None
+- Authentication: None
+- Token: None
+- Description: It Displays all wines in the database.
+
+![Get wines/](./images/endpoints/004.jpg)
+
+----------------------------------------------------------------
+
+#### **7. wines/id**
+
+- Method: Get
+- Identifier: wine_id
+- Authentication: None
+- Token: None
+- Description: It Displays id selected wine information.
+
+![Get wines/id](./images/endpoints/005.jpg)
+
+----------------------------------------------------------------
+
+#### **8. wines/id**
+
+- Method: Delete
+- Identifier: wine_id
+- Authentication: @jwt_required()
+- Token: JWT Access bearer Token Generated when login is successful.
+- Description: It Deletes id selected wine information and returns a delete successfully message.
+
+![Delete wines/id](./images/endpoints/006.jpg)
+
+----------------------------------------------------------------
+
+#### **9. wines/id**
+
+- Method: Put / Patch
+- Identifier: wine_id
+- Authentication: @jwt_required()
+- Token: JWT Access bearer Token Generated when login is successful.
+- Description: It Updates id selected wine information and returns Updated wine Information.
+
+![Update wines/id](./images/endpoints/008.jpg)
+
+----------------------------------------------------------------
+
+#### **10. foods/**
+
+- Method: Post
+- Identifier: user_id
+- Foreign key: wine_id
+- Authentication: @jwt_required()
+- Token: JWT Access bearer Token Generated when login is successful.
+- Description: It allows the user to add a new food to the database and it returns the new entered food, user and wine information. It also adds the date created with the use of datetime Python Module.
+
+![Post foods/](./images/endpoints/009.jpg)
+
+----------------------------------------------------------------
+
+#### **11. foods/**
+
+- Method: Get
+- Identifier: None
+- Authentication: None
+- Token: None
+- Description: It Displays all foods in the database.
+
+![Get foods/](./images/endpoints/010.jpg)
+
+----------------------------------------------------------------
+
+#### **12. foods/id**
+
+- Method: Get
+- Identifier: food_id
+- Authentication: None
+- Token: None
+- Description: It Displays id selected food information. It also returns user information and information about the wine that pairs with it.
+
+![Get foods/id](./images/endpoints/011-A.jpg)
+
+----------------------------------------------------------------
+
+#### **13. foods/id**
+
+- Method: Delete
+- Identifier: food_id
+- Authentication: @jwt_required()
+- Token: JWT Access bearer Token Generated when login is successful.
+- Description: It Deletes id selected food information and returns a delete successfully message.
+
+![Delete foods/id](./images/endpoints/011.jpg)
+
+----------------------------------------------------------------
+
+#### **14. foods/id**
+
+- Method: Put / Patch
+- Identifier: food_id
+- Authentication: @jwt_required()
+- Token: JWT Access bearer Token Generated when login is successful.
+- Description: It Updates id selected food information and returns Updated food Information.
+
+![Update foods/id](./images/endpoints/013.jpg)
+
+----------------------------------------------------------------
+
+#### **Error Handling Endpoints and code snippets:**
+
+----------------------------------------------------------------
+
+#### **1. auth/login/**
+
+- Method: Post
+- Identifier: None
+- Authentication: email and password
+- Token: None
+- Description: Tried login in without required information.
+- Error: 400 Bad Request
+
+![Error 400](./images/endpoints/014-400.jpg)
+
+![Error 400](./images/endpoints/015-400.jpg)
+
+----------------------------------------------------------------
+
+#### **2. wines/**
+
+- Method: Post
+- Identifier: user_id
+- Authentication: @jwt_required()
+- Token: JWT Access bearer Token Generated when login is successful.
+- Description: Tried adding new wine but had a field typo. Returns an Unknown field message.
+- Error: 400 Bad Request
+
+![Error 400](./images/endpoints/016-400.jpg)
+
+----------------------------------------------------------------
+
+#### **3. wines/**
+
+- Method: Post
+- Identifier: user_id
+- Authentication: @jwt_required()
+- Token: JWT Access bearer Token Generated when login is successful.
+- Description: Tried adding new wine without token. returns a missing authorization message.
+- Error: 401 Unauthorized
+
+![Error 401](./images/endpoints/017-401.jpg)
+
+![Error 401](./images/endpoints/018-401.jpg)
+
+----------------------------------------------------------------
+
+#### **4. auth/login/**
+
+- Method: Post
+- Identifier: email
+- Authentication: email and password
+- Token: None
+- Description: Tried login in with wrong password. Returns a invalid email or password message.
+- Error: 401 Unauthorized
+
+![Error 401](./images/endpoints/019-401.jpg)
+
+----------------------------------------------------------------
+
+#### **5. 404**
+
+- Method: Get
+- Identifier: None
+- Authentication: None
+- Token: None
+- Description: Tried accessing non existing route. Returns a not found message.
+- Error: 404 Not Found
+
+![Error 404](./images/endpoints/020-404.jpg)
+
+![Error 404](./images/endpoints/021-404.jpg)
+
+----------------------------------------------------------------
+
+#### **6. auth/register/**
+
+- Method: Post
+- Identifier: None
+- Authentication: None
+- Token: None
+- Description: Tried Registering with email already entered in the database. Returns a email already exists message.
+- Error: 409 Conflict
+
+![Error 409](./images/endpoints/022-409.jpg)
+
+![Error 409](./images/endpoints/023-409.jpg)
+
+----------------------------------------------------------------
+
+#### **7. foods/**
+
+- Method: Post
+- Identifier: user_id
+- Foreign Key: wine_id
+- Authentication: @jwt_required()
+- Token: JWT Access bearer Token Generated when login is successful.
+- Description: Tried adding new food and entered non existing wine_id foreign key. return a wine_id not present in the table message.
+- Error: 500 IntegrityError
+
+![Error 500](./images/endpoints/024-500.jpg)
+
+![Error 500](./images/endpoints/025-500.jpg)
+
+----------------------------------------------------------------
+
+
 #### **R6 - An ERD for your app.**
 
 ![ERD](./images/wine_and_food_ERD.svg)
