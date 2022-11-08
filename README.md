@@ -20,6 +20,8 @@
 
 #### **R5 - Document all endpoints for your API.**
 
+- All information is returned in JSON format.
+
 ----------------------------------------------------------------
 
 #### **1. auth/register/**
@@ -404,6 +406,17 @@
 4. Most real life API's only need id's to interconnect.
 
 ![Day Five](./images/005.jpg)
+
+#### **Day Six:**
+
+#### **Stand-up Day Six:**
+
+1. Finished coding, added Error Handlers, Finished R5 Endpoints.
+2. Spent some time trying to get Autodoc to work untill I saw the thread on Discord.
+3. Testing, R7 - add a Service, R3, R4, R8, R9.
+4. All of this time spent on this project made everything so much more clear.
+
+![Day Six](./images/006.jpg)
 
 [T2A2 - Trello Board Link](https://trello.com/invite/b/PFdD3j01/ATTI3c1f6177a4fcfb1c8ad7cb418e806189CE4181F9/t2a2-agile-board)
 
