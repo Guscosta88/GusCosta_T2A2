@@ -31,6 +31,7 @@ def auth_register():
             # Create a new User model instance from the user_info
             first_name=request.json.get('first_name'),
             last_name=request.json.get('last_name'),
+            occupation=request.json.get('occupation'),
             email=request.json['email'],
             password=bcrypt.generate_password_hash(request.json['password']).decode('utf-8'),
             dob = request.json.get('dob')

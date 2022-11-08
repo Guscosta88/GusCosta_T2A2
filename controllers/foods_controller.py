@@ -67,6 +67,7 @@ def update_one_food(id):
         food.name = request.json.get('name') or food.name
         food.description = request.json.get('description') or food.description
         food.type = request.json.get('type') or food.type
+        food.wine_id = request.json.get('wine_id') or food.wine_id
         # the session commit pushes all of the above changes to the database
         db.session.commit()
         # the Food schema and the dump converts the results into JSON that is displayed.

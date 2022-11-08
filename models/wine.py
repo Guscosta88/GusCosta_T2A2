@@ -21,7 +21,7 @@ class Wine(db.Model):
 
 # Marshmallow ma converts these data types into db readable format via the Schema and with the use of marshmallow fields each column item can be retrieved by the controller on a Model View Control (MVC) structure.
 class WineSchema(ma.Schema):
-    user = fields.Nested('UserSchema', only=['first_name', 'last_name', 'email'])
+    user = fields.Nested('UserSchema', only=['id', 'first_name'])
 
     class Meta:
         fields = ('id', 'name', 'description', 'region', 'type', 'date', 'user')

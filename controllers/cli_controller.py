@@ -31,6 +31,7 @@ def seed_db():
         User(
             first_name='Eddie',
             last_name='Osterland',
+            occupation='Sommelier',
             email='eddieosterland@email.com',
             password=bcrypt.generate_password_hash('merlot').decode('utf-8'),
             dob = '25/06/1954'

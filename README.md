@@ -10,7 +10,7 @@
 
 - Anyone that has an interest in foods and wines can access this API and use it to acquire more knowledge about it, not many options are available for this kind of market.
 - It can be used on food apps, restaurant apps, bottleshop apps and other.
-- To show that anyone over 18 can buy a bottle of wine, cook food that pairs with it and enjoy the little things in life.
+- To show that the person accessing the app, can cook food that pairs with it and enjoy the little things in life.
 
 #### **R3 - Why have you chosen this database system. What are the drawbacks compared to others? Why this DB system? using PosgreSQL, why Postgres? compare to others.**
 
@@ -40,7 +40,7 @@
 #### **User Stories:**
 
 - Taking into consideration the main three types of target audience the API is created for, I have decided to create three user stories to understand what would be the way these three distinct users would approach its usability and with what end, to also understand the priority of each and what features should be available.
-    Any user can Register and login, access and alter foods and wines, unless he or her is underage, the app won't let anyone underage register. 
+    Any user can Register and login, access and alter foods and wines.
 
 ![User Story One](./images/user_story_one.svg)
 
@@ -112,6 +112,18 @@
 4. To have a better idea on how to approach table relations.
 
 ![Day Four](./images/004.jpg)
+
+
+#### **Day Five:**
+
+#### **Stand-up Day Five:**
+
+1. Organized what to be returned on the Schema.
+2. Complicating what is simple.
+3. Finish the code, Add error handlers, Testing.
+4. Most real life API's only need id's to interconnect.
+
+![Day Five](./images/005.jpg)
 
 [T2A2 - Trello Board Link](https://trello.com/invite/b/PFdD3j01/ATTI3c1f6177a4fcfb1c8ad7cb418e806189CE4181F9/t2a2-agile-board)
 
