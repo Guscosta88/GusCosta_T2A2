@@ -2,7 +2,7 @@
 
 from flask_sqlalchemy import SQLAlchemy
 # SQLAlchemy is an Object Relational Mapper (ORM) created to facilitate communication between
-# Python and database
+# Python and database, it also prevents from SQL injections, it sanitizes the queries on the background.
 
 from flask_marshmallow import Marshmallow
 # Marshmallow Is a library that converts to other data types to python data types

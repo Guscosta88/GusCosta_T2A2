@@ -2,9 +2,12 @@ from flask import Blueprint, request
 from flask_jwt_extended import create_access_token
 from init import db, bcrypt
 # This is one of the places where the init items are imported
+# SQL Alchemy prevents from SQL injections, it sanitizes the queries on the background.
+
 from datetime import timedelta
 from models.user import User, UserSchema
 # The User class and UserSchema are imported here from models
+
 from sqlalchemy.exc import IntegrityError
 # this is a sqlalchemy error handler that handles the integrity of the data being send to the database.
 

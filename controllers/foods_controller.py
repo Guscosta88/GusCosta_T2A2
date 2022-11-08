@@ -1,9 +1,14 @@
 from flask import Blueprint, request
 from init import db
-from datetime import date
 # This is one of the places where the init items are imported
+# SQL Alchemy prevents from SQL injections, it sanitizes the queries on the background.
+
+from datetime import date
+# The date function generates the present date when an item is inserted
+
 from models.food import Food, FoodSchema
 # The Food class and FoodSchema are imported here from models
+
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 # This is where the foods route url is defined in the blueprint to be registered in the main.

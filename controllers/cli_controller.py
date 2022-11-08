@@ -1,6 +1,8 @@
 from flask import Blueprint
 from init import db, bcrypt
 # This is one of the places where the init items are imported
+# SQL Alchemy prevents from SQL injections, it sanitizes the queries on the background.
+
 from datetime import date
 from models.wine import Wine
 from models.food import Food
@@ -67,7 +69,8 @@ def seed_db():
             description='T-Bone Steak with mash potatoes and mushroom sauce',
             type='Main',
             date = date.today(),
-            user = users[0]
+            user = users[0],
+            wine_id = 1
         )
     ]
     # the session add_all, adds all of the above changes to the commit
