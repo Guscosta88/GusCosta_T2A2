@@ -20,6 +20,7 @@ from sqlalchemy.exc import IntegrityError
 import os
 # os is a module in python that fetches contents from underlying operating system.
 
+
 def create_app():
     # This function is used so Flask knows where to look up for resources, templates, etc.
     # all of this app's functionality is centralized here.

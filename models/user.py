@@ -3,6 +3,7 @@ from init import db, ma
 
 from marshmallow import fields
 
+
 # the class User uses Sqlalchemy to create a table structure with column names and data types.
 class User(db.Model):
     __tablename__ = 'users'
