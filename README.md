@@ -391,7 +391,216 @@
 
 #### **R8 - Describe your projects models in terms of the relationships they have with each other.**
 
-- sdfgrfrhh.
+- The API wine and foods is represented on the ORM level by the use of an MVC system where its main structure takes place in the Models, the same way the database wine and food has 3 tables, it also has 3 models that represents, in OOP written in Python, those 3 tables as follows.The SQL Alchemy is the ORM that allows queries to be written in Python instead of SQL syntax, in this case, the class uses Sqlalchemy to create a table structure with column names and data types.Marshmallow is an integration tool used alongside SQL alchemy, it converts complex data types from and into Python.As seen below, the foods and the wines models are related to users on a one to many relationship.
+
+- The User Model:
+    The User is the parent model and it is structured as follows with the imports, the Class User, and the User Schema. User is related to wine on a one to many relationship and user is related to food on a one to many relationship.
+
+```py
+
+    from flask_sqlalchemy import SQLAlchemy
+    db = SQLAlchemy()
+    #SQL Alchemy is imported and stored in the "db" variable
+    
+    from marshmallow import ma, fields
+    ma = Marshmallow()
+    #Marshmallow is imported and stored in the "ma" variable
+    #the fields is a Basic field from which other fields should extend
+
+    class User(db.Model):
+        __tablename__ = 'users'
+
+        id = db.Column(db.Integer, primary_key=True, nullable=False)
+        first_name = db.Column(db.String, nullable=False)
+        last_name = db.Column(db.String, nullable=False)
+        occupation = db.Column(db.String)
+        email = db.Column(db.String, nullable=False, unique=True)
+        password = db.Column(db.String, nullable=False)
+        dob =db.Column(db.String, nullable=False)
+
+        wines = db.relationship('Wine', back_populates='user', cascade='all, delete')
+        foods = db.relationship('Food', back_populates='user', cascade='all, delete')
+        #wines and foods are both childs from user and it relates by its class Wine and Food, by its ids as foreign keys. back populates is assigned always synchronize with user and
+        #cascade all delete means that if this child, at some point, loses the relationship with the parent and disassociates it will be deleted.
+
+        # Marshmallow ma converts these data types into db readable format via the Schema and with the use of marshmallow fields each column item can be retrieved  by the controller on a Model View Control (MVC) structure.
+    class UserSchema(ma.Schema):
+        wines = fields.List(fields.Nested('WineSchema', only=['id','name']))
+        foods = fields.List(fields.Nested('FoodSchema', only=['id','name']))
+        #The user schema uses marshmallow to retrieve a List from the wines and foods models via their own WineSchema and FoodSchema
+        #the only attribute allows to choose what columns should be returned from the models, in this case only id and name, that will be Nested in a JSON List and
+        #associated with wines and foods fields returned by the user controller. 
+        
+        class Meta:
+            fields = ('id', 'first_name', 'last_name', 'occupation', 'email', 'password', 'dob', 'wines', 'foods')
+            #the fields marshmallow function returns a collection of objects that represent what was chosen to be returned as JSON when http requested by the controller.
+
+```
+    
+- User Fields being returned in JSON format:
+
+```JSON
+            {
+                "first_name": "Eddie",
+                "last_name": "Osterland",
+                "occupation": "Sommelier",
+                "email": "eddieosterland@email.com",
+                "password": "123456",
+                "dob": "25/06/1954",
+                "wines": [
+                    {
+                        "id": 1,
+                        "name": "Cabernet Sauvignon"
+                    }
+                ],
+                "foods": [
+                    {
+                        "id": 1,
+                        "name": "Steak"
+                    }
+                ]
+            }
+```
+
+- The Wine Model:
+    The Wine is the parent model of foods and children from users and it is structured as follows with the imports, the Class Wine, and the Wine Schema. 
+    Wine is a child of users and a parent of foods.
+
+```py
+
+    from flask_sqlalchemy import SQLAlchemy
+    db = SQLAlchemy()
+    #SQL Alchemy is imported and stored in the "db" variable
+    
+    from marshmallow import ma, fields
+    ma = Marshmallow()
+    #Marshmallow is imported and stored in the "ma" variable
+    #the fields is a Basic field from which other fields should extend
+
+    class Wine(db.Model):
+        __tablename__ = 'wines'
+
+        id = db.Column(db.Integer, primary_key=True, nullable=False)
+        name = db.Column(db.String, nullable=False)
+        description = db.Column(db.Text, nullable=False)
+        region = db.Column(db.String, nullable=False)
+        type = db.Column(db.String, nullable=False)
+        date = db.Column(db.Date)
+        
+        user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+        #user_id is a column in the wines database and it is retrieved from users model using the foreign key id.
+
+        user = db.relationship("User", back_populates='wines')
+        #wines is a child from users and a parent from foods, it relates with users by its class Wine, and with foods by its id as foreign key. back populates is assigned to always synchronize with wines.
+
+        # Marshmallow ma converts these data types into db readable format via the Schema and with the use of marshmallow fields each column item can be retrieved  by the controller on a Model View Control (MVC) structure.
+    class WineSchema(ma.Schema):
+        user = fields.Nested('UserSchema', only=['id', 'first_name'])
+        #The wine schema uses marshmallow to retrieve a Dictionary from the user via UserSchema
+        #the only attribute allows to choose what columns should be returned from the models, in this case only id and first_name, that will be Nested in a JSON List and
+        #associated with user field returned by the wine controller. 
+        
+        class Meta:
+            fields = ('id', 'name', 'description', 'region', 'type', 'date', 'user')
+            #the fields marshmallow function returns a collection of objects that represent what was chosen to be returned as JSON when http requested by the controller.
+
+```
+    
+- Wine Fields being returned in JSON format:
+
+```JSON
+            {
+                "id": 2,
+                "name": "Rioja",
+                "description": "Strong",
+                "region": "Spain",
+                "type": "Red Wine",
+                "date": "2022-11-08",
+                "user": [
+                    {
+                        "id": 2,
+                        "name": "Carl"
+                    }
+                ]
+            }
+```
+
+- The Food Model:
+    The Food is the child of both models wines and users and it is structured as follows with the imports, the Class Food, and the Food Schema.
+    Foods is a child of both users and wines.
+
+```py
+
+    from flask_sqlalchemy import SQLAlchemy
+    db = SQLAlchemy()
+    #SQL Alchemy is imported and stored in the "db" variable
+    
+    from marshmallow import ma, fields
+    ma = Marshmallow()
+    #Marshmallow is imported and stored in the "ma" variable
+    #the fields is a Basic field from which other fields should extend
+
+    class Food(db.Model):
+        __tablename__ = 'foods'
+
+        id = db.Column(db.Integer, primary_key=True)
+        name = db.Column(db.String, nullable=False)
+        description = db.Column(db.Text, nullable=False)
+        type = db.Column(db.String, nullable=False)
+        date = db.Column(db.Date)
+        
+        
+        user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+        wine_id = db.Column(db.Integer, db.ForeignKey('wines.id'))
+        #user_id and wine_id are both columns in the foods database and they are retrieved from users model as well as from the wine model using their foreign key id.
+
+        user = db.relationship("User", back_populates='foods')
+        wine = db.relationship("Wine", back_populates='foods', cascade='all, delete')
+        #foods is a child from users and wines, it relates with users by its class Food, and with wines by the wine id as a foreign key. back populates is assigned to always synchronize with foods.
+
+        # Marshmallow ma converts these data types into db readable format via the Schema and with the use of marshmallow fields each column item can be retrieved  by the controller on a Model View Control (MVC) structure.
+    class FoodSchema(ma.Schema):
+        user = fields.Nested('UserSchema', only=['id', 'first_name'])
+        wine = fields.Nested('WineSchema', only=['id', 'name'])
+        #The wine and user schema uses marshmallow to retrieve a Dictionary from the user via UserSchema and WineSchema
+        #the only attribute allows to choose what columns should be returned from the models, in this case only id and first_name and in the wine, id and name, that will be Nested in a JSON List and
+        #associated with user and wine fields returned by the food controller. 
+        
+        class Meta:
+            fields = ('id', 'name', 'description', 'type', 'date', 'user', 'wine_id', 'wine')
+            #the fields marshmallow function returns a collection of objects that represent what was chosen to be returned as JSON when http requested by the controller.
+
+```
+    
+- Food Fields being returned in JSON format:
+
+```JSON
+            {
+                "id": 2,
+                "name": "Tapas",
+                "description": "Tapas",
+                "type": "Snacks",
+                "date": "2022-11-08",
+                "user": {
+                    "id": 2,
+                    "first_name": "Carl"
+                },
+                "wine_id": 2,
+                "wine": {
+                    "id": 2,
+                    "name": "Rioja"
+                }
+            }
+```
+
+[Basic Relationships](https://docs.sqlalchemy.org/en/20/orm/basic_relationships.html)
+
+[Cascades](https://docs.sqlalchemy.org/en/20/orm/relationship_api.html#sqlalchemy.orm.relationship)
+
+[Fields](https://marshmallow.readthedocs.io/en/stable/marshmallow.fields.html#marshmallow.fields.Nested)
+
+----------------------------------------------------------------
+
 
 #### **R9 - Discuss the database relations to be implemented in your application.**
 
@@ -576,7 +785,3 @@
 
 ![wines_controller.py](./images/testing/009-wines_controller.py.jpg)
 
-
-
-    References
-    [Reference](https://en.wikipedia.org/)

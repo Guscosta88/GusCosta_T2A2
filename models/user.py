@@ -15,7 +15,7 @@ class User(db.Model):
     email = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
     dob =db.Column(db.String, nullable=False)
-    # if user is younger than 18 he is not allowed to use the app
+
     wines = db.relationship('Wine', back_populates='user', cascade='all, delete')
     foods = db.relationship('Food', back_populates='user', cascade='all, delete')
 
