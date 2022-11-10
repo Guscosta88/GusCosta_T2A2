@@ -402,7 +402,7 @@
     User = id primary_key, first_name, last_name, email NOT NULL UNIQUE, password NOT NULL, dob.
 
     Each item from the table users above represents a column, the id is the main identifier and primary key of the table and it is the number that represents that row of items. The user id is the most important id of this API due to the fact that it represents the registered user and it is used for authorization purposes for the user login with the help of the get_jwt_identity(), password and email, than a token is generated and the id is statically stored in memory for the user to add a new wine upon token provided and automatically that id is stored in the wine table as a user id foreign key, via the same process the user id is also stored in the food table as a user id foreign key, this represents a one to many relationship between the users table and the wine and food tables by the user id, which also identifies which user added that specific wine and food.
-    The first name, last name and dob tables are of type strings and represent personal information about the user, the email and password are used for authorization purposes and can not be null, the password is encrypted and hashed and only after that it is stored in the database.
+    The first name, last name and dob tables are of type strings and represent personal information about the user, the email and password are used for authorization purposes and can not be null, the email must be unique otherwise the user can not be registered, the password is encrypted and hashed and only after that it is stored in the database.
 
 - Table Wine:
 
