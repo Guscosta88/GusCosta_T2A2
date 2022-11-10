@@ -742,6 +742,17 @@
 
 ![Day Six](./images/006.jpg)
 
+#### **Day Seven:**
+
+#### **Stand-up Day Seven:**
+
+1. Finished Testing, R3, R4, R8, R9.
+2. Just tired.
+3. R7 - add a Service, Improve testing.
+4. Testing.
+
+![Day Seven](./images/007.jpg)
+
 [T2A2 - Trello Board Link](https://trello.com/invite/b/PFdD3j01/ATTI3c1f6177a4fcfb1c8ad7cb418e806189CE4181F9/t2a2-agile-board)
 
 
