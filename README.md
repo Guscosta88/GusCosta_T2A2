@@ -387,17 +387,43 @@
 
 #### **R7 - Detail any third party services that your app will use.**
 
-- User = id primary_key, first_name, last_name, email NOT NULL UNIQUE, password NOT NULL, dob.
+- xddgfsggfr.
 
 #### **R8 - Describe your projects models in terms of the relationships they have with each other.**
 
-- User = id primary_key, first_name, last_name, email NOT NULL UNIQUE, password NOT NULL, dob.
+- sdfgrfrhh.
 
 #### **R9 - Discuss the database relations to be implemented in your application.**
 
-- User = id primary_key, first_name, last_name, email NOT NULL UNIQUE, password NOT NULL, dob.
-- Wine = id primary_key, name, description, region, type, date, user_id foreign_key.
-- Food = id primary_key, name, description, type, date, wine_id foreign_key, user_id foreign_key.
+- This API features a Database called wine_and_food which contains 3 tables, the table users, the table wines and the table foods, the planning of the relationships between these tables was first represented by writing a set of instructions, that evolved to an ERD diagram that can be seen on R6, and then code.
+
+- Table User:
+
+    User = id primary_key, first_name, last_name, email NOT NULL UNIQUE, password NOT NULL, dob.
+
+    Each item from the table users above represents a column, the id is the main identifier and primary key of the table and it is the number that represents that row of items. The user id is the most important id of this API due to the fact that it represents the registered user and it is used for authorization purposes for the user login with the help of the get_jwt_identity(), password and email, than a token is generated and the id is statically stored in memory for the user to add a new wine upon token provided and automatically that id is stored in the wine table as a user id foreign key, via the same process the user id is also stored in the food table as a user id foreign key, this represents a one to many relationship between the users table and the wine and food tables by the user id, which also identifies which user added that specific wine and food.
+    The first name, last name and dob tables are of type strings and represent personal information about the user, the email and password are used for authorization purposes and can not be null, the password is encrypted and hashed and only after that it is stored in the database.
+
+- Table Wine:
+
+    Wine = id primary_key, name, description, region, type, date, user_id foreign_key.
+
+    Each item in the table Wine represents a column, the wine id is the main identifier and primary key of the table and it is the number that represents that row of items. The wine id is also the foreign key of the foods table and it is used to identify the wine that pairs with that specific food, which is another core feature of this API. the wine table is related to the food table by the foreign key wine id on a one to many relationship.
+    The columns name, description, region, type are strings and represent information about the wine, the date column is of type date and it is generated when the new wine is added to the database with the Python module datetime, the user id is the foreign key that connects the users table with the wine table and it represent the user that added this specific wine on a one to many relationship.
+
+- Table Food:
+
+    Food = id primary_key, name, description, type, date, wine_id foreign_key, user_id foreign_key.
+
+    Each item in the table Food represents a column, the food id is the main identifier and primary key of the table and it is the number that represents that row of items. The wine id is a foreign key in foods table and it is used to identify the wine that pairs with that specific food, which is another core feature of this API. the wine table is related to the food table by the foreign key wine id on a one to many relationship, the wine id is added to the food table by the user upon choosing the right wine to pair with that food.
+    The columns name, description, type are strings and represent information about the food, the date column is of type date and it is generated when the new food is added to the database with the Python module datetime, the user id is the foreign key that connects the users table with the food table and it represent the user that added this specific food on a one to many relationship.
+
+- The user id appears in the wine table on a one to many relationship added automatically via session.
+
+- The user id appears in the food table on a one to many relationship added automatically via session.
+
+- The wine id appears in the food table on a one to many relationship added manually by the user.
+
 
 #### **R10 - Describe the way tasks are allocated and tracked in your project**
 
