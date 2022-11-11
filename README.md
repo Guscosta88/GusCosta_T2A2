@@ -1,6 +1,60 @@
 # **GusCosta_T2A2**
 
-#### **R1 - Identification of the problem you are trying to solve by building this particular app. What the app is, what problem does it solve?**
+# **Table of contents:**
+
+- [**Table of contents**](#table-of-contents)
+    - [**R0 - Installation instructions:**](#r0---installation-instructions)
+
+    - [**R1 - Identification of the problem you are trying to solve by building this particular app.**](#r1---identification-of-the-problem-you-are-trying-to-solve-by-building-this-particular-app)
+
+    - [**R2 - Why is it a problem that needs solving?**](#r2---why-is-it-a-problem-that-needs-solving)
+
+    - [**R3 - Why have you chosen this database system. What are the drawbacks compared to others?**](#r3---why-have-you-chosen-this-database-system-what-are-the-drawbacks-compared-to-others)
+
+    - [**R4 - Identify and discuss the key functionalities and benefits of an ORM.**](#r4---identify-and-discuss-the-key-functionalities-and-benefits-of-an-orm)
+
+    - [**R5 - Document all endpoints for your API**](#r5---document-all-endpoints-for-your-api)
+
+    - [**R6 - An ERD for your app**](#r6---an-erd-for-your-app)
+
+    - [**R7 - Detail any third party services that your app will use**](#r7---detail-any-third-party-services-that-your-app-will-use)
+
+    - [**R8 - Describe your projects models in terms of the relationships they have with each other**](#r8---describe-your-projects-models-in-terms-of-the-relationships-they-have-with-each-other)
+
+    - [**R9 - Discuss the database relations to be implemented in your application**](#r9---discuss-the-database-relations-to-be-implemented-in-your-application)
+
+    - [**R10 - Describe the way tasks are allocated and tracked in your project**](#r10---describe-the-way-tasks-are-allocated-and-tracked-in-your-project)
+
+----------------------------------------------------------------
+
+#### **R0 - Installation instructions:**
+
+#### **Open your WSL command line and run the following commands:**
+
+- psql
+- create database wine_and_food;
+
+#### **Open another WSL command line and run the following commands:**
+
+- python3 -m venv .venv
+- source .venv/bin/activate
+- pip install Flask &&
+    pip install flask-sqlalchemy &&
+    pip install psycopg2-binary &&
+    pip install flask-marshmallow &&
+    pip install marshmallow-sqlalchemy &&
+    pip install flask-bcrypt &&
+    pip install flask-jwt-extended &&
+    pip install python-dotenv
+- pip freeze > requirements.txt
+- flask db create
+- flask db seed
+- flask run
+
+- This should allow you to open 127.0.0.1:8080/ on your browser or Postman.
+
+
+#### **R1 - Identification of the problem you are trying to solve by building this particular app.**
 
 - It takes a name of a type of wine and it returns food options that pair with it.
 - It allows the user to acquire knowledge about the different types of wine and the foods that goes with it.
@@ -8,7 +62,7 @@
 - It allows people to share their knowledge with others.
 - There are many types of wines, many people find comfort and pleasure in pairing good wines with good food and finding this perfect balance between tastes and textures can be hard sometimes, when someone comes accross the perfect combination they can access this API and share it with others. It can also be used by professionals such as Chefs and Sommeliers, so wine enthusiasts can see what they shared and be sure they wont be disappointed with the professional approach on something that for some is just a hobbie.
 
-#### **R2 - Why it is a problem that needs solving?**
+#### **R2 - Why is it a problem that needs solving?**
 
 - Anyone that has an interest in foods and wines can access this API and use it to acquire more knowledge about it, not many options are available for this kind of market.
 - It can be used on food apps, restaurant apps, bottleshop apps and other.
@@ -18,7 +72,7 @@
 - It can be helpful for someone very experienced to see what people's opinions are related to his or her professional opinion as well as the other way around.
 - There could be many combinations of flavours considering the many types of wines, cultures and foods in the world, people from similar cultures can find a combination appealing while others would not have imagined such combinations and be surprised, I think these possibilities are the core reason for this API, to share experiences, human experiences and be amazed by opening up for other people's suggestions of pairing.
 
-#### **R3 - Why have you chosen this database system. What are the drawbacks compared to others? Why this DB system? using PosgreSQL, why Postgres? compare to others.**
+#### **R3 - Why have you chosen this database system. What are the drawbacks compared to others?**
 
 - Postgres is an open source database system that supports relations, SQL, available in the most popular Operating Systems and it is scalable, its features include stored procedures, foreign keys, views, triggers and it has been around for years which means that it has a reliable community with extensive support and resources.
     The Postgres Schemas are flexible and can be used to hold all objects facilitating the interactions between items, two items with the same name can be present in the database.
@@ -48,7 +102,7 @@
 
 ----------------------------------------------------------------
 
-#### **R4 - Identify and discuss the key functionalities and benefits of an ORM, What does an ORM do, what are the benefits?**
+#### **R4 - Identify and discuss the key functionalities and benefits of an ORM.**
 
 - Object Relational Mapping (ORM), in object oriented programming (OOP) it is a way of manipulating objects without interfering or even aknowledging its source, it is used to make a bridge between relational databases and programming languages where both can communicate with each other, one of the reasons for using an ORM tool is to make the code dryer, considering that writing a whole SQL query such as the following:
 
