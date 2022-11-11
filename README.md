@@ -45,7 +45,8 @@
     pip install marshmallow-sqlalchemy &&
     pip install flask-bcrypt &&
     pip install flask-jwt-extended &&
-    pip install python-dotenv
+    pip install python-dotenv &&
+    pip install Flask-Mail
 - pip freeze > requirements.txt
 - flask db create
 - flask db seed

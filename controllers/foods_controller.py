@@ -11,7 +11,6 @@ from models.food import Food, FoodSchema
 
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-
 # This is where the foods route url is defined in the blueprint to be registered in the main.
 foods_db = Blueprint('foods',__name__,url_prefix='/foods')
 

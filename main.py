@@ -9,6 +9,7 @@ from controllers.wines_controller import wines_db
 from controllers.foods_controller import foods_db
 from controllers.auth_controller import auth_db
 from controllers.cli_controller import db_commands
+from controllers.mail_controller import mail_db
 # the main controller commands are imported
 
 from marshmallow.exceptions import ValidationError
@@ -17,9 +18,9 @@ from marshmallow.exceptions import ValidationError
 from sqlalchemy.exc import IntegrityError
 # this is a sqlalchemy error handler that handles the integrity of the data being send to the database.
 
+
 import os
 # os is a module in python that fetches contents from underlying operating system.
-
 
 def create_app():
     # This function is used so Flask knows where to look up for resources, templates, etc.
@@ -62,6 +63,12 @@ def create_app():
     app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY')
     # The configs are responsible for retrieving keys and paths from .env, .flaskenv files that are
     # safer if kept separated and not accessible, os helps retrieve these items.
+    app.config['MAIL_SERVER']= os.environ.get('MAIL_SERVER')
+    app.config['MAIL_PORT'] = os.environ.get('MAIL_PORT')
+    app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+    app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+    app.config['MAIL_USE_TLS'] = True
+    app.config['MAIL_USE_SSL'] = False
 
 
     db.init_app(app)
@@ -74,6 +81,7 @@ def create_app():
     app.register_blueprint(foods_db)
     app.register_blueprint(auth_db)
     app.register_blueprint(db_commands)
+    app.register_blueprint(mail_db)
     # this is where the controllers are resgistered to be able to run when the flask run command is called.
 
     return app

@@ -13,7 +13,6 @@ class Food(db.Model):
     type = db.Column(db.String, nullable=False)
     date = db.Column(db.Date)
     
-    
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     wine_id = db.Column(db.Integer, db.ForeignKey('wines.id'))
 

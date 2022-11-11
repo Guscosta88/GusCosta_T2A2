@@ -18,3 +18,10 @@ db = SQLAlchemy()
 ma = Marshmallow()
 bcrypt = Bcrypt()
 jwt = JWTManager()
+
+
+
+
+
+
+
