@@ -25,6 +25,8 @@
 
     - [**R10 - Describe the way tasks are allocated and tracked in your project**](#r10---describe-the-way-tasks-are-allocated-and-tracked-in-your-project)
 
+    - [**R11 - Testing**](#r11---testing)
+
 ----------------------------------------------------------------
 
 #### **R0 - Installation instructions:**
@@ -93,7 +95,10 @@
         Con: Administration is easier to set-up.
 
     In conclusion, every Database system out there can be better suit for one job ratter than another, however, PostgreSQL has passed the test of time, performance and reliability and for this specific app, it integrates well with the technologies chosen and for that reason it is was the best choice.
-
+    Find bellow the whole structure of the database used in this application written in PostgreSQL.
+    
+    ![postgresql_wine_and_food_db](./images/postgresql_wine_and_food_db.jpg)
+    
 
     [Why Postgresql](https://fulcrum.rocks/blog/why-use-postgresql-database#:~:text=Postgres%20allows%20you%20to%20store,lot%20of%20supporters%20and%20critics.)
 
@@ -329,6 +334,18 @@
 
 ----------------------------------------------------------------
 
+#### **14. send/**
+
+- Method: Get
+- Identifier: food_id
+- Authentication: @jwt_required() and Mailtrap username and password.
+- Token: JWT Access bearer Token Generated when login is successful.
+- Description: It sends an e-mail with a message and JSON list of food information via Mailtramp third party service.
+
+![Postman Message](./images/postman_message.jpg)
+
+----------------------------------------------------------------
+
 #### **Error Handling Endpoints and code snippets:**
 
 ----------------------------------------------------------------
@@ -442,7 +459,57 @@
 
 #### **R7 - Detail any third party services that your app will use.**
 
-- xddgfsggfr.
+- The Third Party Service chosen to be used by this app is called Mailtrap, Mailtrap is widely used by many apps and it has a Feature that allows you to create a fake Simple Mail Transfer Protocol (SMTP) server for testing purposes, which makes it possible to check e-mail sending functionalities as well as notifications without sending anything to real users.
+    Upon registering in the Mailtrap website, the user is provided with a username key as well as a password key, Port Number, Server name, Transport Layer Security (TLS) Encryption and Secure Socket Layer (SSL) Secure communication between server and client.
+    The Keys are stored in the .env file and being imported securely by os.environ.get().
+    See bellow how Mailtrap was implemented.
+    Instructions to access the email and test are in the .env file.
+
+#### **The code to add Mailtrap route.**
+
+```py
+
+    # Mailtrap Third party service set-up 
+    app.config['MAIL_SERVER']= os.environ.get('MAIL_SERVER')
+    # This is where the mail server config is setup and retrieves it from .env
+    app.config['MAIL_PORT'] = os.environ.get('MAIL_PORT')
+    # This is where the server port config is setup and retrieves it from .env
+    app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+    # This is where the user config is setup and retrieves it from .env
+    app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+    # This is where the user password config is setup and retrieves it from .env
+    app.config['MAIL_USE_TLS'] = True
+    app.config['MAIL_USE_SSL'] = False
+    mail = Mail(app)
+
+    @app.route("/send/")
+    def index():
+        stmt = db.select(Food).filter_by(id=1)
+        food = db.session.scalar(stmt)
+        message_body = FoodSchema().dump(food)
+        # This Function retrieves the Food JSON by id, with food, wine and user information and it stores in the message_body variable.
+        msg = Message('Hello wine and food suggestions!', sender =   'alexandra@mailtrap.io', recipients = ['paul@mailtrap.io'])
+        msg.body = f"Look at my suggestion of pairing {message_body}"
+        # The message_body variable is then populated together with a message to be sent by email. 
+        mail.send(msg)
+        return "Message sent!"
+        # once the message is sent a "Message sent!" message is returned
+
+    if __name__ == '__main__':
+        app.run(debug = True)
+
+```
+
+#### **The message returned by Postman.**
+
+
+![Postman Message](./images/postman_message.jpg)
+
+
+#### **The test email being received in the Maitrap Sandbox Test Inbox.**
+
+
+![mailtrap sandbox](./images/mailtrap_sandbox.jpg)
 
 #### **R8 - Describe your projects models in terms of the relationships they have with each other.**
 
@@ -811,7 +878,7 @@
 [T2A2 - Trello Board Link](https://trello.com/invite/b/PFdD3j01/ATTI3c1f6177a4fcfb1c8ad7cb418e806189CE4181F9/t2a2-agile-board)
 
 
-#### **Testing**
+#### **R11 - Testing**
 
 - I ran Pytest Unit Testing on each python file and they do not present any problems:
 

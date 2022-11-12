@@ -35,8 +35,24 @@ def seed_db():
             last_name='Osterland',
             occupation='Sommelier',
             email='eddieosterland@email.com',
-            password=bcrypt.generate_password_hash('merlot').decode('utf-8'),
+            password=bcrypt.generate_password_hash('cabernet').decode('utf-8'),
             dob = '25/06/1954'
+        ),
+        User(
+            first_name='Obi-Wan',
+            last_name='Kenoby',
+            occupation='Jedi',
+            email='rebellion@email.com',
+            password=bcrypt.generate_password_hash('shiraz').decode('utf-8'),
+            dob = '57 BBY'
+        ),
+        User(
+            first_name='Gordon',
+            last_name='Ramsay',
+            occupation='Chef',
+            email='hellskitchen@email.com',
+            password=bcrypt.generate_password_hash('merlot').decode('utf-8'),
+            dob = '08/11/1966'
         )
     ]
 
@@ -54,6 +70,22 @@ def seed_db():
             type='Red Wine',
             date = date.today(),
             user = users[0]
+        ),
+        Wine(
+            name='Shiraz',
+            description='Spice, blue fruit, black fruit and pepper.',
+            region='France, Rhone',
+            type='Red Wine',
+            date = date.today(),
+            user = users[1]
+        ),
+        Wine(
+            name='Merlot',
+            description='blackberry, blueberry, plum, and/or raspberry.',
+            region='France, Bordeaux',
+            type='Red Wine',
+            date = date.today(),
+            user = users[2]
         )
     ]
 
@@ -71,6 +103,22 @@ def seed_db():
             date = date.today(),
             user = users[0],
             wine_id = 1
+        ),
+        Food(
+            name='Barbeque',
+            description='Sausages, kebabs and hearty vegetables that have a nice char from the grill.',
+            type='Main',
+            date = date.today(),
+            user = users[1],
+            wine_id = 2
+        ),
+        Food(
+            name='Duck',
+            description='Gordon\'s Roast Duck with pancakes and Dipping Sauce.',
+            type='Main',
+            date = date.today(),
+            user = users[2],
+            wine_id = 3
         )
     ]
     # the session add_all, adds all of the above changes to the commit
