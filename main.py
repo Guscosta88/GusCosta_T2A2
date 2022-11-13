@@ -22,6 +22,7 @@ from flask_mail import Mail, Message
 # Third Party Service Mailtrap import
 
 import os
+
 # os is a module in python that fetches contents from underlying operating system.
 
 def create_app():

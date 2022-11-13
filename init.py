@@ -13,6 +13,7 @@ from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 # Used to handle tokens
 
+
 # stored in variables for easy access
 db = SQLAlchemy()
 ma = Marshmallow()
